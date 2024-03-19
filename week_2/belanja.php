@@ -1,87 +1,121 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<h2>Form Olshop</h2>
-    <hr>
-    <div class="row mx-5">
-        <div class="col-12 col-md-8">
-            <form action="belanja.php" method="post">
-                <div class="form-group row">
-                    <label for="customer" class="col-4 col-form-label">Customer</label>
-                    <div class="col-8">
-                        <input id="customer" name="customer" type="text" required="required" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-4">Pilih Produk</label>
-                    <div class="col-8">
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input name="produk" id="Produk_0" type="radio" class="custom-control-input" value="TV" required="required">
-                            <label for="Produk_0" class="custom-control-label">HP</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input name="produk" id="Produk_1" type="radio" class="custom-control-input" value="Kulkas" required="required">
-                            <label for="Produk_1" class="custom-control-label">Motor</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input name="produk" id="Produk_2" type="radio" class="custom-control-input" value="Mesin Cuci" required="required">
-                            <label for="Produk_2" class="custom-control-label">Mesin Cuci</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="jumlah" class="col-4 col-form-label">Jumlah</label>
-                    <div class="col-8">
-                        <input id="jumlah" name="jumlah" type="text" class="form-control" required="required">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="offset-4 col-8">
-                        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+<!doctype html>
+<html lang="en">
 
-        <div class="col-12 col-md-4">
-            <ul class="list-group">
-                <li class="list-group-item active">Daftar Harga</li>
-                <li class="list-group-item">HP: 12.200.000,00</li>
-                <li class="list-group-item">Motor: 30.100.000,00</li>
-                <li class="list-group-item">Mesin Cuci: 3.800.000,00</li>
-                <li class="list-group-item active">Harga Dapat Berubah Setiap Saat</li>
-            </ul>
-        </div>
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+	<title>Belanja Online</title>
+</head>
+
+<body>
+    <div>
+        <div class="ml-2 row">
+			<div class="col-8">
+				<form method="POST">
+					<h1>Belanja Online</h1>
+					<hr>
+					<div class="form-group row">
+						<label for="nama" class="col-sm-2 col-form-label">Customer</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="Customer" name="Customer" placeholder="Customer">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="matkul" class="col-sm-2 col-form-label">Pilih Product</label>
+						<div class="col-sm-10">
+							<input type="radio" id="TV" name="TV">
+                            <label id="TV">TV</label>
+                            <input class="ml-4" type="radio" id="Laptop" name="Laptop">
+                            <label id="Laptop">Laptop</label>
+                            <input class="ml-4" type="radio" id="Jam Tangan" name="Jam Tangan">
+                            <label id="Jam Tangan">Jam Tangan</label>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputPassword" class="col-sm-2 col-form-label">Jumlah</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="Jumlah" placeholder="Jumlah" name="Jumlah">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="offset-2">
+							<div class="col-sm-12">
+								<button type="submit" class="btn btn-success" name="kirim">Kirim</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+            <div class="col-4">
+               <table class="table table-borderless table-bordered">
+                    <tr class="bg-dark text-white">
+                        <td>List Harga</td>
+                    </tr>
+                    <tr>
+                        <td>TV: 2.000.000</td>
+                    </tr>
+                    <tr>
+                        <td>Laptop: 3.000.000</td>
+                    </tr>
+                    <tr>
+                        <td>Jam Tangan: 1.000.000</td>
+                    </tr>
+                    <tr class="bg-dark text-white">
+                        <td>Harga Dapat Berubah Setiap Saat</td>
+                    </tr>
+               </table>
+            </div>
+	    </div>
+        <hr>
+        <?php
+        // harga untuk setiap produk
+        $harga_produk = [
+            'TV' => 2000000, // Harga TV
+            'Laptop' => 3000000, // Harga Laptop
+            'Jam Tangan' => 1000000 // Harga Jam Tangan
+        ];
+
+        // pengecekan form submit
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Retrieve form data
+            $customer = $_POST['Customer'];
+            $product = isset($_POST['TV']) ? 'TV' : (isset($_POST['Laptop']) ? 'Laptop' : (isset($_POST['Jam Tangan']) ? 'Jam Tangan' : ''));
+            $quantity = $_POST['Jumlah'];
+        
+            // perhitungan
+            $total_harga = isset($harga_produk[$product]) ? $harga_produk[$product] * $quantity : 0;
+        
+            // Display data submit
+            echo "<div class='ml-2 row'>";
+            echo "<div class='col-8'>";
+            echo "<h4>Struk Belanja</h4>";
+            echo "<p>Customer: $customer</p>";
+            echo "<p>Product: $product</p>";
+            echo "<p>Quantity: $quantity</p>";
+            echo "<p>Total Harga: Rp " . number_format($total_harga, 0, ',', '.') . "</p>"; // Format harga
+            echo "</div>";
+            echo "</div>";
+        }
+    ?>
     </div>
-<?php
-if (isset($_POST['submit'])) {
-    $customer = $_POST['customer'];
-    $produk = $_POST['produk'];
-    $jumlah = $_POST['jumlah'];
 
-    echo "Customer: " . $customer;
-    echo "<br>";
-    echo "Produk: " . $produk;
-    echo "<br>";
-    echo "Jumlah: " . $jumlah;
-    echo "<br>";
+   
 
-    $total_harga = 0;
 
-    switch ($produk) {
-        case "TV":
-            $total_harga = 12200000;
-            break;
-        case "Kulkas":
-            $total_harga = 30100000;
-            break;
-        case "Mesin Cuci":
-            $total_harga = 3800000;
-            break;
-    }
+    
 
-    $total_harga = $total_harga * $jumlah;
 
-    echo "Total Harga: " . number_format($total_harga, 2, ',', '.');
-} else {
-    echo "<script>alert('Kamu harus isi form terlebih dahulu!')</script>";
-}
-?>
+	<!-- Optional JavaScript; choose one of the two! -->
+
+	<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

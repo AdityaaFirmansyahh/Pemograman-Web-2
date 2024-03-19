@@ -9,7 +9,7 @@ $ns4 = ['id'=>4,'nim'=>'01134','uts'=>90,'uas'=>91,'tugas'=>82];
 $ar_nilai = [$ns1, $ns2 , $ns3, $ns4];
 ?>
 <h3>Daftar Nilai Siswa</h3>
-<div class="table-responsive" id="sailorTableArea"></div>
+<div class="table-responsive" id="sailorTableArea" p-4></div>
 <table id="sailorTable" class="table table-striped table-bordered" width="100%">
 <thead>
 <tr>
